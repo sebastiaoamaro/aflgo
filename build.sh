@@ -46,6 +46,9 @@ wget -O compiler-rt-11.0.0.src.tar.xz https://github.com/llvm/llvm-project/relea
 tar -xf compiler-rt-11.0.0.src.tar.xz
 mv      compiler-rt-11.0.0.src        compiler-rt
 
+
+sudo sed -i '/#include <string>/a #include <cstdint>' /home/vagrant/aflgo/instrument/llvm_tools/llvm/include/llvm/Support/Signals.h
+
 mkdir -p build
 
 pushd build
@@ -68,6 +71,7 @@ popd # go to instrument
 
 popd # go to where build.sh is located
 
+
 #######################################
 ### Install LLVMgold in bfd-plugins ###
 #######################################
@@ -85,26 +89,25 @@ $apt_get install -y python3-dev python3-pip pkg-config autoconf automake libtool
 # See https://networkx.org/documentation/stable/release/index.html
 case `python3 -c 'import sys; print(sys.version_info[:][1])'` in
     [01])
-        python3 -m pip install 'networkx<1.9';;
+        python3 -m pip install --break-system-packages 'networkx<1.9';;
     2)
-        python3 -m pip install 'networkx<1.11';;
+        python3 -m pip install --break-system-packages 'networkx<1.11';;
     3)
-        python3 -m pip install 'networkx<2.0';;
+        python3 -m pip install --break-system-packages 'networkx<2.0';;
     4)
-        python3 -m pip install 'networkx<2.2';;
+        python3 -m pip install --break-system-packages 'networkx<2.2';;
     5)
-        python3 -m pip install 'networkx<2.5';;
+        python3 -m pip install --break-system-packages 'networkx<2.5';;
     6)
-        python3 -m pip install 'networkx<2.6';;
+        python3 -m pip install --break-system-packages 'networkx<2.6';;
     7)
-        python3 -m pip install 'networkx<2.7';;
+        python3 -m pip install --break-system-packages 'networkx<2.7';;
     8)
-        python3 -m pip install 'networkx<=3.1';;
+        python3 -m pip install --break-system-packages 'networkx<=3.1';;
     *)
-        python3 -m pip install networkx;;
+        python3 -m pip install --break-system-packages networkx;;
 esac
-python3 -m pip install pydot pydotplus
-
+python3 -m pip install --break-system-packages pydot pydotplus
 ##############################
 ### Build AFLGo components ###
 ##############################
