@@ -48,7 +48,8 @@ mv      compiler-rt-11.0.0.src        compiler-rt
 
 
 sudo sed -i '/#include <string>/a #include <cstdint>' /home/vagrant/aflgo/instrument/llvm_tools/llvm/include/llvm/Support/Signals.h
-sudo grep -q '#include <cstdlib>' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan.cpp || (sudo cp /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan.cpp{,.bak} && sudo sed -i '0,/#include <stdlib.h>/s//#include <stdlib.h>\n#include <cstdlib>/' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan.cpp)
+sed -i '0,/#include /s//#&\n#include <cstdlib>/' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp
+
 
 
 
