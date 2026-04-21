@@ -50,10 +50,10 @@ mv      compiler-rt-11.0.0.src        compiler-rt
 sudo sed -i '/#include <string>/a #include <cstdint>' /home/vagrant/aflgo/instrument/llvm_tools/llvm/include/llvm/Support/Signals.h
 
 cp /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp{,.bak} && \
-grep -q '#include <cstdlib.h>' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp || \
+grep -q '#include <cstdlib>' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp || \
 ( grep -q '#include <stdlib.h>' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp && \
-  sed -i '0,/#include <stdlib.h>/s//#include <stdlib.h>\n#include <cstdlib.h>/' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp \
-  || sed -i '0,/#include /s//#&\n#include <cstdlib.h>/' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp )
+  sed -i '0,/#include <stdlib.h>/s//#include <stdlib.h>\n#include <cstdlib>/' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp \
+  || sed -i '0,/#include /s//#&\n#include <cstdlib>/' /home/vagrant/aflgo/instrument/llvm_tools/compiler-rt/lib/dfsan/dfsan_custom.cpp )
 
 
 
